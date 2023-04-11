@@ -21,5 +21,6 @@ public class Balance {
     private Double amount;
 
     @Column(name = "currency")
+    @Enumerated(EnumType.STRING)
     private Currency currency;
 }

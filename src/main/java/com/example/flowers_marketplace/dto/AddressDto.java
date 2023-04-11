@@ -14,8 +14,6 @@ import java.time.LocalDate;
 @Setter
 @RequiredArgsConstructor
 public class AddressDto {
-    private Long id;
-
     private String district;
 
     private String street;

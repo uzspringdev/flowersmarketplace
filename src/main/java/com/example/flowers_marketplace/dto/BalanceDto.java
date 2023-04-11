@@ -10,9 +10,7 @@ import lombok.Setter;
 @RequiredArgsConstructor
 public class BalanceDto {
 
-    private Long id;
-
     private Double amount;
 
-    private Currency currency;
+    private String currency;
 }

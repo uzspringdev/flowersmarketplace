@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Getter
 @Setter
@@ -28,7 +27,6 @@ public class Flower {
 
     @Column(name = "discount")
     private Float discount;
-
 
     @Column(name = "type")
     @Enumerated(EnumType.STRING)

@@ -38,9 +38,9 @@ public class Address {
     private String longitude;
 
     @Column(name = "created_at")
-    private LocalDate created_at;
+    private LocalDate createdAt;
 
     @Column(name = "updated_at")
-    private LocalDate updated_at;
+    private LocalDate updatedAt;
 
 }

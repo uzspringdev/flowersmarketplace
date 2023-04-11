@@ -18,7 +18,7 @@ public class Store {
     @Column(name = "name")
     private String name;
 
-    @OneToOne
+    @ManyToOne
     private Merchant merchant;
 
     @OneToOne

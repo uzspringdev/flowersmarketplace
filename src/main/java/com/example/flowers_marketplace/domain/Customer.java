@@ -36,6 +36,9 @@ public class Customer {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
+    @OneToOne
+    private Address address;
+
     @Column(name = "created_at")
     private LocalDate createdAt;
 

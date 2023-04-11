@@ -12,7 +12,6 @@ import java.util.List;
 @Setter
 @RequiredArgsConstructor
 public class BankAccountDto {
-    private Long id;
 
     private String firstName;
 
