@@ -1,15 +1,9 @@
 package com.example.flowers_marketplace.dto;
 
 
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
 public class FlowerDto {
     private String name;
 
@@ -29,7 +23,7 @@ public class FlowerDto {
 
     private String descriptionEn;
 
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 }

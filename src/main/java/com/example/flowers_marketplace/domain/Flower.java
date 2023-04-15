@@ -2,15 +2,9 @@ package com.example.flowers_marketplace.domain;
 
 import com.example.flowers_marketplace.model.Type;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
 @Entity
 @Table(name = "flower")
 public class Flower {
@@ -48,8 +42,8 @@ public class Flower {
     private String descriptionEn;
 
     @Column(name = "created_at")
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
-    private LocalDate updatedAt;
+    private LocalDateTime updatedAt;
 }
