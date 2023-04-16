@@ -24,6 +24,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/balance/**").permitAll()
                 .requestMatchers("/api/v1/card/**").permitAll()
                 .requestMatchers("/api/v1/customer/**").permitAll()
+                .requestMatchers("/api/v1/merchant/**").permitAll()
                 .anyRequest()
                 .authenticated();
 

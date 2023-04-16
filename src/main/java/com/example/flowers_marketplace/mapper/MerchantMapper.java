@@ -60,7 +60,7 @@ public interface MerchantMapper {
         }
         if (merchantDto.getAddress() != null)
             merchant.setAddress(toAddressEntity(merchantDto.getAddress()));
-        if (merchant.getCards() != null) {
+        if (merchantDto.getCards() != null) {
             List<Card> merchantCards = merchant.getCards();
             List<Card> newCards = toCardList(merchantDto.getCards());
             merchantCards.addAll(newCards);

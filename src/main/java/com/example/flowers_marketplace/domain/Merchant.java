@@ -45,10 +45,10 @@ public class Merchant {
     @OneToMany
     private Set<Role> roles;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Card> cards;
 
     @Column(name = "rate")
