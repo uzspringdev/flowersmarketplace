@@ -15,6 +15,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
                 .csrf().disable()
                 .headers().frameOptions().disable()
@@ -27,6 +28,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/merchant/**").permitAll()
                 .requestMatchers("/api/v1/store/**").permitAll()
                 .requestMatchers("/api/v1/flower/**").permitAll()
+                .requestMatchers("/api/v1/**").permitAll()
                 .anyRequest()
                 .authenticated();
 

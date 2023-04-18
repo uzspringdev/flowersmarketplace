@@ -9,3 +9,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+json:
+  web:
+    token:
+      secret: strongjwttoken
+      validity: 86400000
