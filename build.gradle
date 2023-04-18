@@ -18,6 +18,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
     // https://mvnrepository.com/artifact/org.mapstruct/mapstruct
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'

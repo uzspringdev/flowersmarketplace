@@ -12,6 +12,7 @@ import com.example.flowers_marketplace.service.StoreService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StoreServiceImpl implements StoreService {
@@ -61,9 +62,10 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public Store update(Long id, StoreDto storeDto) {
-        if (storeRepository.existsById(id)) {
-            Merchant merchant = merchantService.findById(id);
-            Store store = storeMapper.toEntity(storeDto);
+        Optional<Store> optionalStore = storeRepository.findById(id);
+        if (optionalStore.isPresent()) {
+            Store store = storeMapper.updateStoreFromDto(storeDto, optionalStore.get());
+            Merchant merchant = getMerchant(storeDto, store);
             store.setMerchant(merchant);
             return storeRepository.save(store);
         }
@@ -77,5 +79,13 @@ public class StoreServiceImpl implements StoreService {
             return true;
         }
         return false;
+    }
+
+    private Merchant getMerchant(StoreDto storeDto, Store store) {
+        if (storeDto.getId() != null) {
+            return merchantService.findById(storeDto.getId());
+        } else {
+            return store.getMerchant();
+        }
     }
 }
