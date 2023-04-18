@@ -25,6 +25,8 @@ public class SecurityConfig {
                 .requestMatchers("/api/v1/card/**").permitAll()
                 .requestMatchers("/api/v1/customer/**").permitAll()
                 .requestMatchers("/api/v1/merchant/**").permitAll()
+                .requestMatchers("/api/v1/store/**").permitAll()
+                .requestMatchers("/api/v1/flower/**").permitAll()
                 .anyRequest()
                 .authenticated();
 

@@ -2,9 +2,6 @@ package com.example.flowers_marketplace.dto;
 
 import com.example.flowers_marketplace.model.Currency;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -25,14 +22,10 @@ public class CardDto {
 
     private Currency currency;
 
-    @Column(name = "created_at")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @Column(name = "updated_at")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
     public Long getId() {

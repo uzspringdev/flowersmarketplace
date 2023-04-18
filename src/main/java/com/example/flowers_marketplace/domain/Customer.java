@@ -1,16 +1,15 @@
 package com.example.flowers_marketplace.domain;
 
 
+import com.example.flowers_marketplace.model.LangKey;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -42,6 +41,13 @@ public class Customer {
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Card> cards;
+
+    @ManyToMany
+    private Set<Role> roles;
+
+    @Column(name = "lang_key")
+    @Enumerated(value = EnumType.STRING)
+    private LangKey langKey;
 
     @Column(name = "created_at", updatable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
@@ -123,6 +129,22 @@ public class Customer {
 
     public void setCards(List<Card> cards) {
         this.cards = cards;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public LangKey getLangKey() {
+        return langKey;
+    }
+
+    public void setLangKey(LangKey langKey) {
+        this.langKey = langKey;
     }
 
     public LocalDateTime getCreatedAt() {

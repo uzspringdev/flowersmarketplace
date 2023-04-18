@@ -1,5 +1,6 @@
 package com.example.flowers_marketplace.domain;
 
+import com.example.flowers_marketplace.model.LangKey;
 import com.example.flowers_marketplace.model.Rate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
@@ -42,7 +43,7 @@ public class Merchant {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @OneToMany
+    @ManyToMany
     private Set<Role> roles;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -54,6 +55,10 @@ public class Merchant {
     @Column(name = "rate")
     @Enumerated(EnumType.STRING)
     private Rate rate;
+
+    @Column(name = "lang_key")
+    @Enumerated(EnumType.STRING)
+    private LangKey langKey;
 
     @Column(name = "created_at", updatable = false)
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
@@ -151,6 +156,14 @@ public class Merchant {
 
     public void setRate(Rate rate) {
         this.rate = rate;
+    }
+
+    public LangKey getLangKey() {
+        return langKey;
+    }
+
+    public void setLangKey(LangKey langKey) {
+        this.langKey = langKey;
     }
 
     public LocalDateTime getCreatedAt() {

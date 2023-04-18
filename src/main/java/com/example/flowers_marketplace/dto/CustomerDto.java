@@ -2,10 +2,16 @@ package com.example.flowers_marketplace.dto;
 
 
 
+import com.example.flowers_marketplace.domain.Role;
+import com.example.flowers_marketplace.model.LangKey;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.Column;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class CustomerDto {
     private Long id;
@@ -25,6 +31,10 @@ public class CustomerDto {
     private AddressDto address;
 
     private List<CardDto> cards;
+
+    private Set<Role> roles;
+
+    private LangKey langKey;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime createdAt;
@@ -102,6 +112,22 @@ public class CustomerDto {
 
     public void setCards(List<CardDto> cards) {
         this.cards = cards;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public LangKey getLangKey() {
+        return langKey;
+    }
+
+    public void setLangKey(LangKey langKey) {
+        this.langKey = langKey;
     }
 
     public LocalDateTime getCreatedAt() {

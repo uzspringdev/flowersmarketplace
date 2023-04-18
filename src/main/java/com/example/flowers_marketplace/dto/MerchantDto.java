@@ -1,14 +1,12 @@
 package com.example.flowers_marketplace.dto;
 
 import com.example.flowers_marketplace.domain.Role;
+import com.example.flowers_marketplace.model.LangKey;
 import com.example.flowers_marketplace.model.Rate;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -38,6 +36,8 @@ public class MerchantDto {
     private List<CardDto> cards;
 
     private Rate rate;
+
+    private LangKey langKey;
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime createdAt;
@@ -123,6 +123,14 @@ public class MerchantDto {
 
     public void setRate(Rate rate) {
         this.rate = rate;
+    }
+
+    public LangKey getLangKey() {
+        return langKey;
+    }
+
+    public void setLangKey(LangKey langKey) {
+        this.langKey = langKey;
     }
 
     public LocalDateTime getCreatedAt() {
