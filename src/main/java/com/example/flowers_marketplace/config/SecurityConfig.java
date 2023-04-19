@@ -1,5 +1,7 @@
 package com.example.flowers_marketplace.config;
 
+import com.example.flowers_marketplace.security.JwtConfigure;
+import com.example.flowers_marketplace.security.JwtService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -12,6 +14,11 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 @Configuration
 public class SecurityConfig {
+    private final JwtService jwtService;
+
+    public SecurityConfig(JwtService jwtService) {
+        this.jwtService = jwtService;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -21,16 +28,11 @@ public class SecurityConfig {
                 .headers().frameOptions().disable()
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/address/**").permitAll()
-                .requestMatchers("/api/v1/balance/**").permitAll()
-                .requestMatchers("/api/v1/card/**").permitAll()
-                .requestMatchers("/api/v1/customer/**").permitAll()
-                .requestMatchers("/api/v1/merchant/**").permitAll()
-                .requestMatchers("/api/v1/store/**").permitAll()
-                .requestMatchers("/api/v1/flower/**").permitAll()
-                .requestMatchers("/api/v1/**").permitAll()
+                .requestMatchers("/api/v1/auth").permitAll()
+                .requestMatchers("/api/v1/customer/register").permitAll()
                 .anyRequest()
-                .authenticated();
+                .authenticated()
+                .and().apply(getJwtConfigure(jwtService));
 
         return http.build();
     }
@@ -38,5 +40,9 @@ public class SecurityConfig {
     @Bean
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    private JwtConfigure getJwtConfigure(JwtService jwtService) {
+        return new JwtConfigure(jwtService);
     }
 }

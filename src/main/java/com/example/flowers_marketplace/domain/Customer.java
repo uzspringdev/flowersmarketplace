@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -42,8 +43,13 @@ public class Customer {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Card> cards;
 
-    @ManyToMany
-    private Set<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "customers_roles",
+            joinColumns = {@JoinColumn(name = "customer_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_name", referencedColumnName = "name")}
+    )
+    private Set<Role> roles = new HashSet<>(List.of(new Role("USER")));
 
     @Column(name = "lang_key")
     @Enumerated(value = EnumType.STRING)

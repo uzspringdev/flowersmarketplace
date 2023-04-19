@@ -12,5 +12,5 @@ spring:
 json:
   web:
     token:
-      secret: strongjwttoken
+      secret: strongjwttokensecret
       validity: 86400000

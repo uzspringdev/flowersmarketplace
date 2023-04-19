@@ -11,6 +11,7 @@ import com.example.flowers_marketplace.service.CardService;
 import com.example.flowers_marketplace.service.CustomerService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +33,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public Customer save(CustomerDto customerDto) {
+    public Customer save( CustomerDto customerDto) {
         Customer customer = customerMapper.toEntity(customerDto);
         customer.setAddress(addressService.save(customerDto.getAddress()));
         customer.setCards(cardService.saveAll(customerDto.getCards()));

@@ -4,17 +4,11 @@ import com.example.flowers_marketplace.domain.Role;
 import com.example.flowers_marketplace.model.LangKey;
 import com.example.flowers_marketplace.model.Rate;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
 public class MerchantDto {
 
     private String username;
