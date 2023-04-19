@@ -1,10 +1,12 @@
 package com.example.flowers_marketplace.mapper;
 
+import com.example.flowers_marketplace.domain.Role;
 import com.example.flowers_marketplace.domain.UserAccount;
 import com.example.flowers_marketplace.dto.UserAccountDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
+
+import java.util.Set;
 
 @Mapper
 public interface UserAccountMapper {
@@ -27,6 +29,12 @@ public interface UserAccountMapper {
             userAccount.setPassword(userAccountDto.getPassword());
         if (userAccountDto.getUserType() != null)
             userAccount.setUserType(userAccountDto.getUserType());
+        if (userAccountDto.getRoles() != null) {
+            Set<Role> userRoles = userAccount.getRoles();
+            Set<Role> newRoles = userAccountDto.getRoles();
+            userRoles.addAll(newRoles);
+            userAccount.setRoles(userRoles);
+        }
 
         return userAccount;
     }

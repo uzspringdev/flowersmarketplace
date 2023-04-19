@@ -1,10 +1,7 @@
 package com.example.flowers_marketplace.mapper;
 
 
-import com.example.flowers_marketplace.domain.Address;
-import com.example.flowers_marketplace.domain.Card;
-import com.example.flowers_marketplace.domain.Merchant;
-import com.example.flowers_marketplace.domain.Role;
+import com.example.flowers_marketplace.domain.*;
 import com.example.flowers_marketplace.dto.AddressDto;
 import com.example.flowers_marketplace.dto.CardDto;
 import com.example.flowers_marketplace.dto.MerchantDto;
@@ -22,7 +19,33 @@ public interface MerchantMapper {
 
     MerchantMapper getInstance = Mappers.getMapper(MerchantMapper.class);
 
-    Merchant toEntity(MerchantDto merchantDto);
+    //Merchant toEntity(MerchantDto merchantDto);
+
+    default Merchant toEntity(MerchantDto merchantDto) {
+        if (merchantDto == null) {
+            return null;
+        }
+
+        Merchant merchant = new Merchant();
+        UserAccount userAccount = new UserAccount();
+        userAccount.setUsername(merchantDto.getUsername());
+        userAccount.setPassword(merchantDto.getPassword());
+        userAccount.setUserType(merchantDto.getUserType());
+        userAccount.setRoles(merchantDto.getRoles());
+        merchant.setFirstName(merchantDto.getFirstName());
+        merchant.setLastName(merchantDto.getLastName());
+        merchant.setPhoneNumber(merchantDto.getPhoneNumber());
+        merchant.setEmail(merchantDto.getEmail());
+        merchant.setAddress(toAddressEntity(merchantDto.getAddress()));
+        merchant.setCards(toCardList(merchantDto.getCards()));
+        merchant.setRate(merchantDto.getRate());
+        merchant.setLangKey(merchantDto.getLangKey());
+        merchant.setCreatedAt(merchantDto.getCreatedAt());
+        merchant.setUpdatedAt(merchantDto.getUpdatedAt());
+        merchant.setUserAccount(userAccount);
+
+        return merchant;
+    }
 
     MerchantDto toDto(Merchant merchant);
 
@@ -48,12 +71,12 @@ public interface MerchantMapper {
             merchant.setPhoneNumber(merchantDto.getPhoneNumber());
         if (merchantDto.getEmail() != null)
             merchant.setEmail(merchantDto.getEmail());
-        if (merchantDto.getRoles() != null) {
+        /*if (merchantDto.getRoles() != null) {
             Set<Role> merchantRoles = merchant.getRoles();
             Set<Role> newRoles = merchantDto.getRoles();
             merchantRoles.addAll(newRoles);
             merchant.setRoles(merchantRoles);
-        }
+        }*/
         if (merchantDto.getAddress() != null)
             merchant.setAddress(toAddressEntity(merchantDto.getAddress()));
         if (merchantDto.getCards() != null) {

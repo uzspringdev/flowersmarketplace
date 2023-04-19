@@ -41,14 +41,6 @@ public class Customer {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Card> cards;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "customers_roles",
-            joinColumns = {@JoinColumn(name = "customer_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_name", referencedColumnName = "name")}
-    )
-    private Set<Role> roles = new HashSet<>(List.of(new Role("USER")));
-
     @Column(name = "lang_key")
     @Enumerated(value = EnumType.STRING)
     private LangKey langKey;
@@ -125,14 +117,6 @@ public class Customer {
 
     public void setCards(List<Card> cards) {
         this.cards = cards;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
     }
 
     public LangKey getLangKey() {

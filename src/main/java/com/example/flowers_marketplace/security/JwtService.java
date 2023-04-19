@@ -47,7 +47,6 @@ public class JwtService {
 
     public String generateToken(Login login) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword());
-        authenticationManagerBuilder.authenticationProvider((AuthenticationProvider) userDetailsService.loadUserByUsername(""));
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(","));

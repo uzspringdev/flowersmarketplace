@@ -7,10 +7,7 @@ import com.example.flowers_marketplace.dto.CustomerDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
-
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
 @Mapper
 public interface CustomerMapper {
@@ -37,6 +34,7 @@ public interface CustomerMapper {
         userAccount.setUsername(customerDto.getUsername());
         userAccount.setPassword(customerDto.getPassword());
         userAccount.setUserType(customerDto.getUserType());
+        userAccount.setRoles(customerDto.getRoles());
         customer.setId(customerDto.getId());
         customer.setFirstName(customerDto.getFirstName());
         customer.setLastName(customerDto.getLastName());
@@ -44,10 +42,6 @@ public interface CustomerMapper {
         customer.setEmail(customerDto.getEmail());
         customer.setAddress(toAddressEntity(customerDto.getAddress()));
         customer.setCards(toCardList(customerDto.getCards()));
-        Set<Role> set = customerDto.getRoles();
-        if (set != null) {
-            customer.setRoles(new LinkedHashSet<>(set));
-        }
         customer.setLangKey(customerDto.getLangKey());
         customer.setCreatedAt(customerDto.getCreatedAt());
         customer.setUpdatedAt(customerDto.getUpdatedAt());

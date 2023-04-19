@@ -5,6 +5,7 @@ import com.example.flowers_marketplace.dto.UserAccountDto;
 import com.example.flowers_marketplace.mapper.UserAccountMapper;
 import com.example.flowers_marketplace.repository.UserAccountRepository;
 import com.example.flowers_marketplace.service.UserAccountService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,20 +14,24 @@ import java.util.Optional;
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
     private final UserAccountRepository userAccountRepository;
+    private final BCryptPasswordEncoder encoder;
     private final UserAccountMapper userAccountMapper = UserAccountMapper.getInstance;
 
-    public UserAccountServiceImpl(UserAccountRepository userAccountRepository) {
+    public UserAccountServiceImpl(UserAccountRepository userAccountRepository, BCryptPasswordEncoder encoder) {
         this.userAccountRepository = userAccountRepository;
+        this.encoder = encoder;
     }
 
     @Override
     public UserAccount save(UserAccountDto userAccountDto) {
         UserAccount userAccount = userAccountMapper.toEntity(userAccountDto);
+        userAccount.setPassword(encoder.encode(userAccountDto.getPassword()));
         return userAccountRepository.save(userAccount);
     }
 
     @Override
     public UserAccount save(UserAccount userAccount) {
+        userAccount.setPassword(encoder.encode(userAccount.getPassword()));
         return userAccountRepository.save(userAccount);
     }
 

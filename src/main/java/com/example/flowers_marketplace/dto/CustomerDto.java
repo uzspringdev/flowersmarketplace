@@ -1,14 +1,10 @@
 package com.example.flowers_marketplace.dto;
 
 
-
 import com.example.flowers_marketplace.domain.Role;
 import com.example.flowers_marketplace.model.LangKey;
 import com.example.flowers_marketplace.model.UserType;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 
 import java.time.LocalDateTime;
 import java.util.List;

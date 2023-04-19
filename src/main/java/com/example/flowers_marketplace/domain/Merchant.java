@@ -35,9 +35,6 @@ public class Merchant {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @ManyToMany
-    private Set<Role> roles;
-
     @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
@@ -110,13 +107,6 @@ public class Merchant {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 
     public Address getAddress() {
         return address;

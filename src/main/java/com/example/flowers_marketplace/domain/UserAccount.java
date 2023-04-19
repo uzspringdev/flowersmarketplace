@@ -3,6 +3,8 @@ package com.example.flowers_marketplace.domain;
 import com.example.flowers_marketplace.model.UserType;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "user_account")
 public class UserAccount {
@@ -18,6 +20,13 @@ public class UserAccount {
     @Column(name = "password", nullable = false, length = 60)
     private String password;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "customers_roles",
+            joinColumns = {@JoinColumn(name = "customer_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_name", referencedColumnName = "name")})
+    private Set<Role> roles;
+
     @Column(name = "user_type")
     @Enumerated(EnumType.STRING)
     private UserType userType;
@@ -28,6 +37,13 @@ public class UserAccount {
     public UserAccount(String username, String password, UserType userType) {
         this.username = username;
         this.password = password;
+        this.userType = userType;
+    }
+
+    public UserAccount(String username, String password, Set<Role> roles, UserType userType) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
         this.userType = userType;
     }
 
@@ -53,6 +69,14 @@ public class UserAccount {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public UserType getUserType() {

@@ -1,37 +1,42 @@
 package com.example.flowers_marketplace.service.impl;
 
-import com.example.flowers_marketplace.domain.Address;
-import com.example.flowers_marketplace.domain.Card;
-import com.example.flowers_marketplace.domain.Merchant;
-import com.example.flowers_marketplace.domain.Role;
+import com.example.flowers_marketplace.domain.*;
 import com.example.flowers_marketplace.dto.MerchantDto;
 import com.example.flowers_marketplace.mapper.MerchantMapper;
 import com.example.flowers_marketplace.repository.MerchantRepository;
 import com.example.flowers_marketplace.service.AddressService;
 import com.example.flowers_marketplace.service.CardService;
 import com.example.flowers_marketplace.service.MerchantService;
+import com.example.flowers_marketplace.service.UserAccountService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class MerchantServiceImpl implements MerchantService {
     private final MerchantRepository merchantRepository;
     private final AddressService addressService;
     private final CardService cardService;
+    private final UserAccountService userAccountService;
     private final MerchantMapper merchantMapper = MerchantMapper.getInstance;
 
-    public MerchantServiceImpl(MerchantRepository merchantRepository, AddressService addressService, CardService cardService) {
+    public MerchantServiceImpl(MerchantRepository merchantRepository, AddressService addressService, CardService cardService, UserAccountService userAccountService) {
         this.merchantRepository = merchantRepository;
         this.addressService = addressService;
         this.cardService = cardService;
+        this.userAccountService = userAccountService;
     }
 
     @Override
     public Merchant save(MerchantDto merchantDto) {
         Merchant merchant = merchantMapper.toEntity(merchantDto);
+        UserAccount userAccount = userAccountService.save(merchant.getUserAccount());
+        Address address = addressService.save(merchantDto.getAddress());
+        List<Card> cards = cardService.saveAll(merchantDto.getCards());
+        merchant.setUserAccount(userAccount);
+        merchant.setAddress(address);
+        merchant.setCards(cards);
         return merchantRepository.save(merchant);
     }
 
@@ -57,10 +62,8 @@ public class MerchantServiceImpl implements MerchantService {
             Merchant merchant = merchantMapper.updateMerchantFromDto(merchantDto, optionalMerchant.get());
             Address address = addressService.save(merchant.getAddress());
             List<Card> cards = cardService.saveAll(merchantMapper.toCardDtoList(merchant.getCards()));
-            Set<Role> roles = merchant.getRoles();
             merchant.setAddress(address);
             merchant.setCards(cards);
-            merchant.setRoles(roles);
             return merchant;
         }
         return null;
