@@ -13,17 +13,14 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "customer")
+@Table(name = "customer", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", unique = true, nullable = false)
-    private String username;
-
-    @Column(name = "password", nullable = false, length = 60)
-    private String password;
+    @OneToOne
+    private UserAccount userAccount;
 
     @Column(name = "first_name")
     private String firstName;
@@ -73,20 +70,12 @@ public class Customer {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public UserAccount getUserAccount() {
+        return userAccount;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 
     public String getFirstName() {

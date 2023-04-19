@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "merchant")
+@Table(name = "merchant", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class Merchant {
 
     @Id

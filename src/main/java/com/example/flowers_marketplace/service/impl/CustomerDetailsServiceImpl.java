@@ -13,10 +13,10 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class CustomerDetailsServiceImpl implements UserDetailsService {
     private final CustomerRepository customerRepository;
 
-    public UserDetailsServiceImpl(CustomerRepository customerRepository) {
+    public CustomerDetailsServiceImpl(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 

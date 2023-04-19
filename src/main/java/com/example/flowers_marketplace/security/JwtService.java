@@ -1,18 +1,21 @@
 package com.example.flowers_marketplace.security;
 
 import com.example.flowers_marketplace.model.Login;
-import com.example.flowers_marketplace.service.impl.UserDetailsServiceImpl;
+import com.example.flowers_marketplace.service.impl.CustomerDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import java.util.Base64;
@@ -22,7 +25,7 @@ import java.util.stream.Collectors;
 @Component
 public class JwtService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
-    private final UserDetailsServiceImpl userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     @Value("${json.web.token.validity}")
     private Long validityTime;
@@ -31,7 +34,7 @@ public class JwtService {
     private String secret;
 
 
-    public JwtService(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsServiceImpl userDetailsService) {
+    public JwtService(AuthenticationManagerBuilder authenticationManagerBuilder, CustomerDetailsServiceImpl userDetailsService) {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDetailsService = userDetailsService;
     }
@@ -44,6 +47,7 @@ public class JwtService {
 
     public String generateToken(Login login) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword());
+        authenticationManagerBuilder.authenticationProvider((AuthenticationProvider) userDetailsService.loadUserByUsername(""));
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String roles = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(","));
@@ -63,9 +67,14 @@ public class JwtService {
     }
 
     public Boolean isValid(String token) {
-        Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
-        Date now = new Date();
-        return !claims.getExpiration().before(now);
+        try {
+            Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+            Date now = new Date();
+            return !claims.getExpiration().before(now);
+        } catch (MalformedJwtException exception) {
+            exception.printStackTrace();
+        }
+        return false;
     }
 
     public String extractUsername(String token) {
