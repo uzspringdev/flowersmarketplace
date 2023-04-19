@@ -1,0 +1,19 @@
+package com.example.flowers_marketplace.domain;
+
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+@Table(name = "cart")
+public class Cart {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "name")
+    private String name;
+
+    @OneToMany
+    private List<Flower> flowers;
+}
