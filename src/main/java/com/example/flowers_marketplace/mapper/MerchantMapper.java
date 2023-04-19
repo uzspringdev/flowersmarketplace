@@ -40,10 +40,6 @@ public interface MerchantMapper {
         if (merchantDto == null) {
             return null;
         }
-        if (merchantDto.getUsername() != null)
-            merchant.setUsername(merchantDto.getUsername());
-        if (merchantDto.getPassword() != null)
-            merchant.setPassword(merchantDto.getPassword());
         if (merchantDto.getFirstName() != null)
             merchant.setFirstName(merchantDto.getFirstName());
         if (merchantDto.getLastName() != null)

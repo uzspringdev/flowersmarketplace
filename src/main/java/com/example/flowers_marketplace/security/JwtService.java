@@ -1,7 +1,7 @@
 package com.example.flowers_marketplace.security;
 
 import com.example.flowers_marketplace.model.Login;
-import com.example.flowers_marketplace.service.impl.CustomerDetailsServiceImpl;
+import com.example.flowers_marketplace.service.impl.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -34,7 +34,7 @@ public class JwtService {
     private String secret;
 
 
-    public JwtService(AuthenticationManagerBuilder authenticationManagerBuilder, CustomerDetailsServiceImpl userDetailsService) {
+    public JwtService(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsServiceImpl userDetailsService) {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDetailsService = userDetailsService;
     }

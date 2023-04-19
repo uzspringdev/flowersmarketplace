@@ -4,6 +4,7 @@ package com.example.flowers_marketplace.dto;
 
 import com.example.flowers_marketplace.domain.Role;
 import com.example.flowers_marketplace.model.LangKey;
+import com.example.flowers_marketplace.model.UserType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
@@ -27,6 +28,8 @@ public class CustomerDto {
     private String phoneNumber;
 
     private String email;
+    private UserType userType;
+
 
     private AddressDto address;
 
@@ -96,6 +99,14 @@ public class CustomerDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     public AddressDto getAddress() {

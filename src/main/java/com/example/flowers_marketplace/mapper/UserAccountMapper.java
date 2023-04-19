@@ -3,6 +3,7 @@ package com.example.flowers_marketplace.mapper;
 import com.example.flowers_marketplace.domain.UserAccount;
 import com.example.flowers_marketplace.dto.UserAccountDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -13,4 +14,20 @@ public interface UserAccountMapper {
     UserAccount toEntity(UserAccountDto userAccountDto);
 
     UserAccountDto toDto(UserAccount userAccount);
+
+    default UserAccount updateFromDto(UserAccountDto userAccountDto, UserAccount userAccount) {
+        if (userAccountDto == null) {
+            return null;
+        }
+        if (userAccountDto.getId() != null)
+            userAccount.setId(userAccountDto.getId());
+        if (userAccountDto.getUsername() != null)
+            userAccount.setUsername(userAccountDto.getUsername());
+        if (userAccountDto.getPassword() != null)
+            userAccount.setPassword(userAccountDto.getPassword());
+        if (userAccountDto.getUserType() != null)
+            userAccount.setUserType(userAccountDto.getUserType());
+
+        return userAccount;
+    }
 }

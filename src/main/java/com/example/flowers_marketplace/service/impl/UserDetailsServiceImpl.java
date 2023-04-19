@@ -1,23 +1,22 @@
 package com.example.flowers_marketplace.service.impl;
 
 import com.example.flowers_marketplace.domain.Customer;
-import com.example.flowers_marketplace.repository.CustomerRepository;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import com.example.flowers_marketplace.domain.Merchant;
+import com.example.flowers_marketplace.repository.MerchantRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.stream.Collectors;
+import java.util.function.Function;
+
 
 @Service
-public class CustomerDetailsServiceImpl implements UserDetailsService {
-    private final CustomerRepository customerRepository;
+public class UserDetailsServiceImpl implements UserDetailsService {
+    private final MerchantRepository merchantRepository;
 
-    public CustomerDetailsServiceImpl(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    public UserDetailsServiceImpl(MerchantRepository merchantRepository) {
+        this.merchantRepository = merchantRepository;
     }
 
     /**
@@ -34,8 +33,8 @@ public class CustomerDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Customer customer = customerRepository.findByUsername(username);
-        return new UserDetails() {
+
+        return null;/*new UserDetails() {
             @Override
             public Collection<? extends GrantedAuthority> getAuthorities() {
                 return customer.getRoles()
@@ -73,6 +72,6 @@ public class CustomerDetailsServiceImpl implements UserDetailsService {
             public boolean isEnabled() {
                 return true;
             }
-        };
+        };*/
     }
 }

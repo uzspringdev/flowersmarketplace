@@ -3,6 +3,7 @@ package com.example.flowers_marketplace.dto;
 import com.example.flowers_marketplace.domain.Role;
 import com.example.flowers_marketplace.model.LangKey;
 import com.example.flowers_marketplace.model.Rate;
+import com.example.flowers_marketplace.model.UserType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,8 @@ public class MerchantDto {
     private String phoneNumber;
 
     private String email;
+
+    private UserType userType;
 
     private Set<Role> roles;
 
@@ -85,6 +88,14 @@ public class MerchantDto {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
     }
 
     public Set<Role> getRoles() {

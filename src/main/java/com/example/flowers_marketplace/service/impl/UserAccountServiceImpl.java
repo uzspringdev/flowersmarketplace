@@ -8,6 +8,7 @@ import com.example.flowers_marketplace.service.UserAccountService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
@@ -41,12 +42,20 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public UserAccount update(Long id, UserAccountDto userAccountDto) {
-
+        Optional<UserAccount> optionalUserAccount = userAccountRepository.findById(id);
+        if (optionalUserAccount.isPresent()) {
+            UserAccount userAccount = userAccountMapper.updateFromDto(userAccountDto, optionalUserAccount.get());
+            return userAccountRepository.save(userAccount);
+        }
         return null;
     }
 
     @Override
     public Boolean delete(Long id) {
-        return null;
+        if (userAccountRepository.existsById(id)) {
+            userAccountRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 }

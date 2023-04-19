@@ -13,13 +13,14 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "customer", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
+@Table(name = "customer")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_account_id", referencedColumnName = "id")
     private UserAccount userAccount;
 
     @Column(name = "first_name")

@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "user_account")
 public class UserAccount {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,6 +21,15 @@ public class UserAccount {
     @Column(name = "user_type")
     @Enumerated(EnumType.STRING)
     private UserType userType;
+
+    public UserAccount() {
+    }
+
+    public UserAccount(String username, String password, UserType userType) {
+        this.username = username;
+        this.password = password;
+        this.userType = userType;
+    }
 
     public Long getId() {
         return id;

@@ -12,18 +12,16 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "merchant", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
+@Table(name = "merchant")
 public class Merchant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "username", unique = true, nullable = false, length = 120)
-    private String username;
-
-    @Column(name = "password", nullable = false, length = 60)
-    private String password;
+    @OneToOne
+    @JoinColumn(name = "user_account_id", referencedColumnName = "id")
+    private UserAccount userAccount;
 
     @Column(name = "first_name")
     private String firstName;
@@ -72,20 +70,12 @@ public class Merchant {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public UserAccount getUserAccount() {
+        return userAccount;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
     }
 
     public String getFirstName() {
