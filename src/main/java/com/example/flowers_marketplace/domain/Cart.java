@@ -14,6 +14,10 @@ public class Cart {
     @Column(name = "name")
     private String name;
 
+    @OneToOne
+    @JoinColumn(name = "customer_id" , referencedColumnName = "id")
+    private Customer customer;
+
     @OneToMany
     private List<Flower> flowers;
 }
