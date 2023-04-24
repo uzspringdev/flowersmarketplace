@@ -2,13 +2,9 @@ package com.example.flowers_marketplace.security;
 
 import com.example.flowers_marketplace.model.Login;
 import com.example.flowers_marketplace.service.impl.UserDetailsServiceImpl;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -18,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
 import java.util.Base64;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -27,12 +24,14 @@ public class JwtService {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final UserDetailsService userDetailsService;
 
-    @Value("${json.web.token.validity}")
-    private Long validityTime;
+    @Value("${json.web.token.validation-time}")
+    private Long validationTime;
+
+    @Value("${json.web.token.refresh-time}")
+    private Long refreshTimeMillis;
 
     @Value("${json.web.token.secret}")
     private String secret;
-
 
     public JwtService(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsServiceImpl userDetailsService) {
         this.authenticationManagerBuilder = authenticationManagerBuilder;
@@ -54,7 +53,7 @@ public class JwtService {
         claims.setSubject(login.getUsername());
         claims.put("roles", roles);
         Date issuedDate = new Date();
-        Date expireDate = new Date(issuedDate.getTime() + validityTime);
+        Date expireDate = new Date(issuedDate.getTime() + validationTime);
 
         return Jwts
                 .builder()
@@ -65,11 +64,33 @@ public class JwtService {
                 .compact();
     }
 
+    public String refreshToken(String token) {
+        Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+        Date now = new Date(System.currentTimeMillis());
+        Date expirationDate = new Date(now.getTime() + this.refreshTimeMillis);
+        return Jwts.builder()
+                .setClaims(claims)
+                .signWith(SignatureAlgorithm.HS256, this.secret)
+                .setIssuedAt(now)
+                .setExpiration(expirationDate)
+                .compact();
+
+    }
+
+    public Boolean shouldRefreshToken(String token) {
+        Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
+        Instant now = Instant.now();
+        Instant expirationDate = claims.getExpiration().toInstant();
+        Instant refreshTime = expirationDate.minusMillis(refreshTimeMillis);
+
+        return now.isAfter(refreshTime);
+    }
+
     public Boolean isValid(String token) {
         try {
             Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
             Date now = new Date();
-            return !claims.getExpiration().before(now);
+            return !claims.getExpiration().before(now);  //20.04.2023 21.04.2023
         } catch (MalformedJwtException exception) {
             exception.printStackTrace();
         }

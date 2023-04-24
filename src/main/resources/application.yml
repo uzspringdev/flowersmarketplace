@@ -8,9 +8,10 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
 json:
   web:
     token:
       secret: strongjwttokensecret
-      validity: 86400000
+      validation-time: 30000
+      refresh-time: 15000
