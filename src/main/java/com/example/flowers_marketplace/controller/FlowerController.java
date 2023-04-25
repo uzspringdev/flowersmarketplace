@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1")
+@RequestMapping(value = "/api/v1/flowers")
 public class FlowerController {
 
     private final FlowerService flowerService;
@@ -19,31 +19,31 @@ public class FlowerController {
         this.flowerService = flowerService;
     }
 
-    @PostMapping(value = "/flower/create")
+    @PostMapping(value = "/create")
     public ResponseEntity<?> create(@RequestBody FlowerDto flowerDto) {
         Flower flower = flowerService.save(flowerDto);
         return ResponseEntity.ok(flower);
     }
 
-    @GetMapping(value = "/flowers/getAll")
+    @GetMapping(value = "/getAll")
     public ResponseEntity<?> getAll() {
         List<Flower> flowerList = flowerService.findAll();
         return ResponseEntity.ok(flowerList);
     }
 
-    @GetMapping(value = "/flowers/getById/{id}")
+    @GetMapping(value = "/getById/{id}")
     public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
         Flower flower = flowerService.findById(id);
         return ResponseEntity.ok(flower);
     }
 
-    @PutMapping(value = "/flower/update/{id}")
+    @PutMapping(value = "/update/{id}")
     public ResponseEntity<?> update(@PathVariable(name = "id") Long id, @RequestBody FlowerDto flowerDto) {
         Flower flower = flowerService.update(id, flowerDto);
         return ResponseEntity.ok(flower);
     }
 
-    @DeleteMapping(value = "/flower/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
         return flowerService.delete(id)
                 ? ResponseEntity.ok("Flower deleted")

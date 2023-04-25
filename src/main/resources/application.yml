@@ -13,5 +13,5 @@ json:
   web:
     token:
       secret: strongjwttokensecret
-      validation-time: 30000
-      refresh-time: 15000
+      validation-time: 86400000
+      refresh-time: 43200000

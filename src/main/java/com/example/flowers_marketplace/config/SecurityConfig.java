@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -24,13 +25,11 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .csrf().disable()
-                .headers().frameOptions().disable()
-                .and()
+
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth").permitAll()
                 .requestMatchers("/api/v1/customer/register").permitAll()
-                .requestMatchers("/api/v1/merchant/register").hasRole("ROLE_ADMIN")
+                .requestMatchers("/api/v1/merchant/register").hasAnyRole("USER")
                 .anyRequest()
                 .authenticated()
                 .and().apply(getJwtConfigure(jwtService));
@@ -46,4 +45,6 @@ public class SecurityConfig {
     private JwtConfigure getJwtConfigure(JwtService jwtService) {
         return new JwtConfigure(jwtService);
     }
+
+
 }

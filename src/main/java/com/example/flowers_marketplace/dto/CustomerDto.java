@@ -24,8 +24,8 @@ public class CustomerDto {
     private String phoneNumber;
 
     private String email;
-    private UserType userType;
 
+    private UserType userType;
 
     private AddressDto address;
 

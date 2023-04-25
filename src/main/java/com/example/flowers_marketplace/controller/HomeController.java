@@ -27,7 +27,7 @@ public class HomeController {
         this.merchantService = merchantService;
     }
 
-    @PostMapping(value = "/auth")
+    @GetMapping(value = "/auth")
     public ResponseEntity<?> signIn(@RequestBody Login login) {
         String token = jwtService.generateToken(login);
 
@@ -36,13 +36,13 @@ public class HomeController {
         return new ResponseEntity<>(new JwtToken(token), headers, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/customer/register")
+    @PostMapping(value = "/customers/register")
     public ResponseEntity<?> signUpCustomer(@RequestBody CustomerDto customerDto) {
         Customer customer = customerService.save(customerDto);
         return ResponseEntity.ok(customer);
     }
 
-    @PostMapping(value = "/merchant/register")
+    @PostMapping(value = "/merchants/register")
     public ResponseEntity<?> signUpMerchant(@RequestBody MerchantDto merchantDto) {
         Merchant merchant = merchantService.save(merchantDto);
         return ResponseEntity.ok(merchant);

@@ -11,13 +11,34 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
     @OneToOne
-    @JoinColumn(name = "customer_id" , referencedColumnName = "id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     private Customer customer;
 
     @OneToMany
     private List<Flower> flowers;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Flower> getFlowers() {
+        return flowers;
+    }
+
+    public void setFlowers(List<Flower> flowers) {
+        this.flowers = flowers;
+    }
 }

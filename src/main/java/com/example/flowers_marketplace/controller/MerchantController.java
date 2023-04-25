@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1")
+@RequestMapping(value = "/api/v1/merchants")
 public class MerchantController {
 
     private final MerchantService merchantService;
@@ -19,33 +19,33 @@ public class MerchantController {
         this.merchantService = merchantService;
     }
 
-    @PostMapping(value = "/merchant/create")
+    @PostMapping(value = "/create")
     public ResponseEntity<?> create(@RequestBody MerchantDto merchantDto) {
         Merchant merchant = merchantService.save(merchantDto);
         return ResponseEntity.ok(merchant);
 
     }
 
-    @GetMapping(value = "/merchant/getAll")
+    @GetMapping(value = "/getAll")
     public ResponseEntity<?> getAll() {
         List<Merchant> merchantList = merchantService.findAll();
         return ResponseEntity.ok(merchantList);
     }
 
-    @GetMapping(value = "/merchant/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> getById(@PathVariable(name = "id") Long id) {
         Merchant merchant = merchantService.findById(id);
 
         return ResponseEntity.ok(merchant);
     }
 
-    @PutMapping(value = "/merchant/update/{id}")
+    @PutMapping(value = "/update/{id}")
     public ResponseEntity<?> update(@PathVariable(name = "id") Long id, @RequestBody MerchantDto merchantDto) {
         Merchant merchant = merchantService.update(id, merchantDto);
         return ResponseEntity.ok(merchant);
     }
 
-    @DeleteMapping(value = "/merchant/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
         return merchantService.delete(id)
                 ? ResponseEntity.status(HttpStatus.OK).body("Merchant deleted")
