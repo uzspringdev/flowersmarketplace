@@ -12,7 +12,7 @@ public class Cart {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "id", unique = true)
     private Customer customer;
 
     @OneToMany

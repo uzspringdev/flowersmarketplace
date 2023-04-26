@@ -38,6 +38,16 @@ public class FlowerServiceImpl implements FlowerService {
     }
 
     @Override
+    public List<Flower> saveAll(List<Long> ids) {
+        return null;
+    }
+
+    @Override
+    public List<Flower> findAllByIds(List<Long> listIds) {
+        return flowerRepository.findAllById(listIds);
+    }
+
+    @Override
     public Flower findById(Long id) {
         return flowerRepository.findById(id).orElse(null);
     }
@@ -67,6 +77,7 @@ public class FlowerServiceImpl implements FlowerService {
         }
         return false;
     }
+
 
     private Store getStore(Flower flower, FlowerDto flowerDto) {
         if (flowerDto.getStoreId() != null) {

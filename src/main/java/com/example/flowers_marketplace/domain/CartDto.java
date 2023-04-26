@@ -1,35 +1,34 @@
 package com.example.flowers_marketplace.domain;
 
-import com.example.flowers_marketplace.dto.FlowerDto;
 
 import java.util.List;
 
 public class CartDto {
-    private Integer id;
-    private Integer customerId;
-    private List<FlowerDto> flowers;
+    private Long id;
+    private Long customerId;
+    private List<Long> flowers;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(Integer customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 
-    public List<FlowerDto> getFlowers() {
+    public List<Long> getFlowers() {
         return flowers;
     }
 
-    public void setFlowers(List<FlowerDto> flowers) {
+    public void setFlowers(List<Long> flowers) {
         this.flowers = flowers;
     }
 }

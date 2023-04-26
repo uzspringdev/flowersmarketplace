@@ -1,13 +1,13 @@
 package com.example.flowers_marketplace.dto;
 
 
-
 import com.example.flowers_marketplace.model.Type;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDateTime;
 
 public class FlowerDto {
+    private Long id;
     private String name;
 
     private Double price;
@@ -31,6 +31,14 @@ public class FlowerDto {
 
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
     private LocalDateTime updatedAt;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

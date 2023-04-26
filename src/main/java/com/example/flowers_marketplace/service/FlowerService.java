@@ -11,6 +11,8 @@ public interface FlowerService {
 
     Flower save(Flower flower);
 
+    List<Flower> saveAll(List<Long> ids);
+
     Flower findById(Long id);
 
     List<Flower> findAll();
@@ -18,4 +20,8 @@ public interface FlowerService {
     Flower update(Long id, FlowerDto flowerDto);
 
     Boolean delete(Long id);
+
+    List<Flower> findAllByIds(List<Long> listIds);
+
+
 }

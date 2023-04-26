@@ -20,7 +20,8 @@ public class JwtConfigure extends SecurityConfigurerAdapter<DefaultSecurityFilte
         CsrfHeaderFilter csrfHeaderFilter = new CsrfHeaderFilter();
         http
                 .headers().frameOptions().disable()
-                .and().csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and().csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .and()
                 .addFilterBefore(jwtSecurityFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterAfter(csrfHeaderFilter, CsrfFilter.class);
