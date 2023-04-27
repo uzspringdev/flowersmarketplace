@@ -25,7 +25,7 @@ public class JwtService {
     private final UserDetailsService userDetailsService;
 
     @Value("${json.web.token.validation-time}")
-    private Long validationTime;
+    private Long validationTimeMillis;
 
     @Value("${json.web.token.refresh-time}")
     private Long refreshTimeMillis;
@@ -53,7 +53,7 @@ public class JwtService {
         claims.setSubject(login.getUsername());
         claims.put("roles", roles);
         Date issuedDate = new Date();
-        Date expireDate = new Date(issuedDate.getTime() + validationTime);
+        Date expireDate = new Date(issuedDate.getTime() + validationTimeMillis);
 
         return Jwts
                 .builder()
@@ -83,7 +83,7 @@ public class JwtService {
         Instant expirationDate = claims.getExpiration().toInstant();
         Instant refreshTime = expirationDate.minusMillis(refreshTimeMillis);
 
-        return now.isAfter(refreshTime);
+        return now.isAfter(refreshTime); //20.04.2023 21.04.2023
     }
 
     public Boolean isValid(String token) {

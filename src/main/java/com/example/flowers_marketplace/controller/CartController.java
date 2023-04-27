@@ -1,7 +1,7 @@
 package com.example.flowers_marketplace.controller;
 
 import com.example.flowers_marketplace.domain.Cart;
-import com.example.flowers_marketplace.domain.CartDto;
+import com.example.flowers_marketplace.dto.CartDto;
 import com.example.flowers_marketplace.service.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

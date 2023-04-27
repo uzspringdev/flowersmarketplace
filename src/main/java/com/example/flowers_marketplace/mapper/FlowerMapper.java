@@ -3,7 +3,6 @@ package com.example.flowers_marketplace.mapper;
 import com.example.flowers_marketplace.domain.Flower;
 import com.example.flowers_marketplace.dto.FlowerDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -28,8 +27,8 @@ public interface FlowerMapper {
             flower.setDiscount(flowerDto.getDiscount());
         if (flowerDto.getType() != null)
             flower.setType(flowerDto.getType());
-        if (flowerDto.getCount() != null)
-            flower.setCount(flowerDto.getCount());
+        if (flowerDto.getStock() != null)
+            flower.setStock(flowerDto.getStock());
         if (flowerDto.getDescriptionUz() != null)
             flower.setDescriptionUz(flowerDto.getDescriptionUz());
         if (flowerDto.getDescriptionRu() != null)

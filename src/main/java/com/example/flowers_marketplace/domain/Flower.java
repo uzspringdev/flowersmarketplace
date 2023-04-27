@@ -32,8 +32,8 @@ public class Flower {
     @ManyToOne
     private Store store;
 
-    @Column(name = "count")
-    private Long count;
+    @Column(name = "stock")
+    private Long stock;
 
     @Column(name = "description_uz")
     private String descriptionUz;
@@ -102,12 +102,12 @@ public class Flower {
         this.store = store;
     }
 
-    public Long getCount() {
-        return count;
+    public Long getStock() {
+        return stock;
     }
 
-    public void setCount(Long count) {
-        this.count = count;
+    public void setStock(Long count) {
+        this.stock = count;
     }
 
     public String getDescriptionUz() {

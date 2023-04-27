@@ -18,7 +18,7 @@ public class FlowerDto {
 
     private Long storeId;
 
-    private Long count;
+    private Long stock;
 
     private String descriptionUz;
 
@@ -80,12 +80,12 @@ public class FlowerDto {
         this.storeId = storeId;
     }
 
-    public Long getCount() {
-        return count;
+    public Long getStock() {
+        return stock;
     }
 
-    public void setCount(Long count) {
-        this.count = count;
+    public void setStock(Long stock) {
+        this.stock = stock;
     }
 
     public String getDescriptionUz() {

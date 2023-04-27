@@ -16,7 +16,7 @@ public class Cart {
     private Customer customer;
 
     @OneToMany
-    private List<Flower> flowers;
+    private List<CartItem> cartItems;
 
     public Long getId() {
         return id;
@@ -34,11 +34,11 @@ public class Cart {
         this.customer = customer;
     }
 
-    public List<Flower> getFlowers() {
-        return flowers;
+    public List<CartItem> getCartItems() {
+        return cartItems;
     }
 
-    public void setFlowers(List<Flower> flowers) {
-        this.flowers = flowers;
+    public void setCartItems(List<CartItem> cartItems) {
+        this.cartItems = cartItems;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.flowers_marketplace.service;
 
 import com.example.flowers_marketplace.domain.Cart;
-import com.example.flowers_marketplace.domain.CartDto;
+import com.example.flowers_marketplace.dto.CartDto;
 
 import java.util.List;
 

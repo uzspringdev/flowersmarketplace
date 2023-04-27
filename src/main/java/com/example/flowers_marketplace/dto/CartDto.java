@@ -1,4 +1,4 @@
-package com.example.flowers_marketplace.domain;
+package com.example.flowers_marketplace.dto;
 
 
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.List;
 public class CartDto {
     private Long id;
     private Long customerId;
-    private List<Long> flowers;
+    private List<Long> cartItems;
 
     public Long getId() {
         return id;
@@ -24,11 +24,11 @@ public class CartDto {
         this.customerId = customerId;
     }
 
-    public List<Long> getFlowers() {
-        return flowers;
+    public List<Long> getCartItems() {
+        return cartItems;
     }
 
-    public void setFlowers(List<Long> flowers) {
-        this.flowers = flowers;
+    public void setCartItems(List<Long> cartItems) {
+        this.cartItems = cartItems;
     }
 }
