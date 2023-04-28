@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth").permitAll()
                 .requestMatchers("/api/v1/customers/register").permitAll()
-                .requestMatchers("/api/v1/merchants/register").hasAnyRole("USER")
+                .requestMatchers("/api/v1/merchants/register").hasAnyRole("SUPER_ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and().apply(getJwtConfigure(jwtService));

@@ -71,12 +71,7 @@ public interface MerchantMapper {
             merchant.setPhoneNumber(merchantDto.getPhoneNumber());
         if (merchantDto.getEmail() != null)
             merchant.setEmail(merchantDto.getEmail());
-        /*if (merchantDto.getRoles() != null) {
-            Set<Role> merchantRoles = merchant.getRoles();
-            Set<Role> newRoles = merchantDto.getRoles();
-            merchantRoles.addAll(newRoles);
-            merchant.setRoles(merchantRoles);
-        }*/
+
         if (merchantDto.getAddress() != null)
             merchant.setAddress(toAddressEntity(merchantDto.getAddress()));
         if (merchantDto.getCards() != null) {

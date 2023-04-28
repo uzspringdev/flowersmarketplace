@@ -7,16 +7,18 @@ import java.util.List;
 
 public interface UserAccountService {
 
-
     UserAccount save(UserAccountDto userAccountDto);
 
     UserAccount save(UserAccount userAccount);
 
     UserAccount findById(Long id);
 
+    UserAccount findByUsername(String username);
+
     List<UserAccount> findAll();
 
     UserAccount update(Long id, UserAccountDto userAccountDto);
 
     Boolean delete(Long id);
+
 }

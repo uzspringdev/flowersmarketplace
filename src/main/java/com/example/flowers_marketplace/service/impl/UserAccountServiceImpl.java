@@ -1,10 +1,14 @@
 package com.example.flowers_marketplace.service.impl;
 
+import com.example.flowers_marketplace.domain.Customer;
 import com.example.flowers_marketplace.domain.UserAccount;
 import com.example.flowers_marketplace.dto.UserAccountDto;
 import com.example.flowers_marketplace.mapper.UserAccountMapper;
 import com.example.flowers_marketplace.repository.UserAccountRepository;
+import com.example.flowers_marketplace.service.CustomerService;
 import com.example.flowers_marketplace.service.UserAccountService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +45,11 @@ public class UserAccountServiceImpl implements UserAccountService {
     }
 
     @Override
+    public UserAccount findByUsername(String username) {
+        return userAccountRepository.findByUsername(username);
+    }
+
+    @Override
     public List<UserAccount> findAll() {
         return userAccountRepository.findAll();
     }
@@ -63,4 +72,6 @@ public class UserAccountServiceImpl implements UserAccountService {
         }
         return false;
     }
+
+
 }

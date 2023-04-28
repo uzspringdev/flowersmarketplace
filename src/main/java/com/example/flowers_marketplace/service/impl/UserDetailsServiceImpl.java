@@ -1,8 +1,6 @@
 package com.example.flowers_marketplace.service.impl;
 
-import com.example.flowers_marketplace.domain.Merchant;
 import com.example.flowers_marketplace.domain.UserAccount;
-import com.example.flowers_marketplace.repository.MerchantRepository;
 import com.example.flowers_marketplace.repository.UserAccountRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 
@@ -43,10 +40,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         UserAccount userAccount = userAccountRepository.findByUsername(username);
         return new UserDetails() {
             @Override
-            public Collection<? extends GrantedAuthority> getAuthorities() {
-                return userAccount.getRoles()
-                        .stream()
-                        .map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
+            public String getUsername() {
+                return userAccount.getUsername();
             }
 
             @Override
@@ -55,8 +50,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             }
 
             @Override
-            public String getUsername() {
-                return userAccount.getUsername();
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return userAccount.getRoles()
+                        .stream()
+                        .map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
             }
 
             @Override

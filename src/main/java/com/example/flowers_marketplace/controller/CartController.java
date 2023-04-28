@@ -2,6 +2,7 @@ package com.example.flowers_marketplace.controller;
 
 import com.example.flowers_marketplace.domain.Cart;
 import com.example.flowers_marketplace.dto.CartDto;
+import com.example.flowers_marketplace.dto.CartItemDto;
 import com.example.flowers_marketplace.service.CartService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,13 @@ public class CartController {
     @PostMapping(value = "/create")
     public ResponseEntity<?> create(@RequestBody CartDto cartDto) {
         Cart cart = cartService.save(cartDto);
+
+        return ResponseEntity.ok(cart);
+    }
+
+    @PostMapping(value = "/addCartItem")
+    public ResponseEntity<?> create(@RequestBody CartItemDto cartItemDto) {
+        Cart cart = cartService.addCartItem(cartItemDto);
 
         return ResponseEntity.ok(cart);
     }

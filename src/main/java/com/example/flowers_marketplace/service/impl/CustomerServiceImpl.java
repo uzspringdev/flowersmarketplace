@@ -11,6 +11,8 @@ import com.example.flowers_marketplace.service.AddressService;
 import com.example.flowers_marketplace.service.CardService;
 import com.example.flowers_marketplace.service.CustomerService;
 import com.example.flowers_marketplace.service.UserAccountService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -53,6 +55,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    public Customer findByUserAccountId(Long userAccountId) {
+        return customerRepository.findByUserAccountId(userAccountId);
+    }
+
+    @Override
     public List<Customer> findAll() {
         return customerRepository.findAll();
     }
@@ -81,5 +88,17 @@ public class CustomerServiceImpl implements CustomerService {
             return true;
         }
         return false;
+    }
+
+
+    @Override
+    public Customer getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            UserAccount userAccount = userAccountService.findByUsername(authentication.getName());
+            Long userAccountId = userAccount.getId();
+            return findByUserAccountId(userAccountId);
+        }
+        return null;
     }
 }

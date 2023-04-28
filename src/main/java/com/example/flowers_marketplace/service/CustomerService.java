@@ -12,9 +12,12 @@ public interface CustomerService {
 
     Customer findById(Long id);
 
+    Customer findByUserAccountId(Long userAccountId);
     List<Customer> findAll();
 
     Customer update(Long id, CustomerDto customerDto);
 
     Boolean delete(Long id);
+
+    Customer getCurrentUser();
 }
