@@ -16,7 +16,7 @@ public class Admin {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_account_id", referencedColumnName = "id", unique = true)
     private UserAccount userAccount;
 
@@ -32,7 +32,7 @@ public class Admin {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Address address;
 
     @Column(name = "status")

@@ -17,10 +17,11 @@ public class Store {
     @Column(name = "name")
     private String name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Merchant merchant;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "address_id", referencedColumnName = "id", unique = true)
     private Address address;
 
     @Column(name = "created_at", updatable = false, nullable = false)

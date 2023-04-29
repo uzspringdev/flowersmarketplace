@@ -11,7 +11,7 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "customer_id", referencedColumnName = "id", unique = true)
     private Customer customer;
 

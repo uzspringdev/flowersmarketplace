@@ -24,12 +24,20 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .csrf().ignoringRequestMatchers("/api/v1/customers/register")
+                .csrf()
+                .ignoringRequestMatchers("/api/v1/admins/create")
+                .ignoringRequestMatchers("/api/v1/customers/create")
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/v1/auth").permitAll()
-                .requestMatchers("/api/v1/customers/register").permitAll()
-                .requestMatchers("/api/v1/merchants/register").hasAnyRole("SUPER_ADMIN")
+                .requestMatchers("/api/v1/customers/create").permitAll()
+                .requestMatchers("/api/v1/merchants/**").hasAnyRole("ADMIN")
+                .requestMatchers("/api/v1/stores/**").hasAnyRole("ADMIN")
+                .requestMatchers("/api/v1/admins/**").hasAnyRole("ADMIN")
+                .requestMatchers("/api/v1/carts/**").hasAnyRole("CUSTOMER")
+                .requestMatchers("/api/v1/customers/**").hasAnyRole("CUSTOMER")
+                .requestMatchers("/api/v1/merchants/**").hasAnyRole("MERCHANT")
+                .requestMatchers("/api/v1/flowers/**").hasAnyRole("MERCHANT")
                 .anyRequest()
                 .authenticated()
                 .and().apply(getJwtConfigure(jwtService));

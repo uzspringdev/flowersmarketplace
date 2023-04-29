@@ -31,12 +31,12 @@ public class MerchantServiceImpl implements MerchantService {
     @Override
     public Merchant save(MerchantDto merchantDto) {
         Merchant merchant = merchantMapper.toEntity(merchantDto);
-        UserAccount userAccount = userAccountService.save(merchant.getUserAccount());
+        /*UserAccount userAccount = userAccountService.save(merchant.getUserAccount());
         Address address = addressService.save(merchantDto.getAddress());
-        List<Card> cards = cardService.saveAll(merchantDto.getCards());
-        merchant.setUserAccount(userAccount);
-        merchant.setAddress(address);
-        merchant.setCards(cards);
+        List<Card> cards = cardService.saveAll(merchantDto.getCards());*/
+        merchant.setUserAccount(merchant.getUserAccount());
+        merchant.setAddress(merchant.getAddress());
+        merchant.setCards(merchant.getCards());
         return merchantRepository.save(merchant);
     }
 

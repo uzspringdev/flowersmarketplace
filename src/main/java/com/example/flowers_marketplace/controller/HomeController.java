@@ -36,7 +36,7 @@ public class HomeController {
         return new ResponseEntity<>(new JwtToken(token), headers, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/customers/register")
+   /* @PostMapping(value = "/customers/register")
     public ResponseEntity<?> signUpCustomer(@RequestBody CustomerDto customerDto) {
         Customer customer = customerService.save(customerDto);
         return ResponseEntity.ok(customer);
@@ -46,7 +46,7 @@ public class HomeController {
     public ResponseEntity<?> signUpMerchant(@RequestBody MerchantDto merchantDto) {
         Merchant merchant = merchantService.save(merchantDto);
         return ResponseEntity.ok(merchant);
-    }
+    }*/
 
 
 }

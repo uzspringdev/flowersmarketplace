@@ -29,7 +29,7 @@ public class Flower {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Store store;
 
     @Column(name = "stock")

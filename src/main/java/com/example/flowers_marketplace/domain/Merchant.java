@@ -19,8 +19,8 @@ public class Merchant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_account_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_account_id", referencedColumnName = "id",unique = true)
     private UserAccount userAccount;
 
     @Column(name = "first_name")
@@ -35,10 +35,10 @@ public class Merchant {
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Address address;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.PERSIST)
     private List<Card> cards;
 
     @Column(name = "rate")
